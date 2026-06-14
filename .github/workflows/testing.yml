@@ -1,7 +1,7 @@
-on: push 
+on: push
 
-job:
-   hello_world:
-       - runs : ubuntu-latest 
-      steps:
-      - run : echo "Hello, World!!"
+jobs:
+  hello_world:
+     runs-on : ubuntu-latest
+     steps:
+     - run : echo "Hello, World!!"
