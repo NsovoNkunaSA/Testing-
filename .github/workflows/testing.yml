@@ -1,8 +1,7 @@
-on: push
+on: push concurrency: 
 
-
-jobs:
+job:
    hello_world:
-       - runs : ubuntu-latest
-       steps: 
-       - run : echo "Hello World!!!!"
+   - runs : ubuntu-latest 
+   steps:
+   -run : echo "Hello, Wolrd!!!"
