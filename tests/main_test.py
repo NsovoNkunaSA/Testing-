@@ -14,7 +14,8 @@ def client():
 def test_hello_endpoint(client):
     response = client.get('/')
     assert response.status_code == 200
-    assert response.json['message'] == 'Hello World'
+
+    assert response.json['message'] == 'Hello World from Flask!'
 
 def test_health_endpoint(client):
     response = client.get('/health')
