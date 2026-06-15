@@ -1,7 +1,39 @@
-on: push
+name: Flask Automation
+
+on: [push, workflow_dispatch]
 
 jobs:
-  hello_world:
-     runs-on : ubuntu-latest
-     steps:
-     - run : echo "Hello, World!!"
+  automate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install flask
+        pip install pytest
+    
+    - name: Run tests
+      run: |
+        pytest tests/ -v
+    
+    - name: Start Flask_app
+      run: |
+        python app/main.py &
+        sleep 3
+    
+    - name: Test running app with curl
+      run: |
+        echo "Testing / endpoint..."
+        curl -s http://localhost:5001/ | python -m json.tool
+        
+        echo "Testing /health endpoint..."
+        curl -s http://localhost:5001/health | python -m json.tool
+        
+        echo "All tests passed! Automation complete!!!!"
